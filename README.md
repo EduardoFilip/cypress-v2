@@ -1,5 +1,5 @@
 ## Teste de Automação com Cypress - CAC-TAT
-Este projeto foi desenvolvido com o intuito de realizar testes automatizados no software CAC-TAT utilizando o framework Cypress, simulando web desktop e mobile viewport.
+Este projeto foi desenvolvido com o intuito de realizar testes automatizados no software CAC-TAT utilizando o framework Cypress, simulando web desktop e mobile viewport, com pipeline de integração contínua.
 
 ## Pré-requisitos
 
