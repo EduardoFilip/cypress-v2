@@ -8,6 +8,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     // Variáveis
 
     const   skipTime = 3000
+    const longText = Cypress._.repeat('Teste ',100)
+
 
     /* TC001 - Verificar o Título da aplicação */
 
@@ -62,7 +64,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.get('#lastName').type('Filip')
     cy.get('#email').type('teste@email.com')
     cy.get('#phone-checkbox').check()
-    cy.get('#open-text-area').type('Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste,Teste', {delay: 0})
+    cy.get('#open-text-area').invoke('val', longText)
     cy.get('button[type="submit"]').click()
 
     cy.get('.error') .should('be.visible')
@@ -189,6 +191,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .should(function($input){
             expect($input[0].files[0].name).to.equal('example.json')
         })
+       
     })
 
     /* TC015 - Verifica que a política de privacidade abre em outra aba sem a necessidade de um clique */
@@ -208,7 +211,19 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .should('be.visible')
     })
 
+    /* TC017 - Requisição por http */
+    it('TC017 - Requisição por http', function(){
+
+        cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+        .should(function(response){
+            const { status, statusText, body } = response
+            expect(status).to.equal(200)
+            expect(statusText).to.equal('OK')
+            expect(body).to.include('CAC TAT')
+        })
 
 
+    })
+    
 
   })    
